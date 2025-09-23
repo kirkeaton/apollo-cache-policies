@@ -1,1 +1,0 @@
-export { default as ApolloExtensionsClient } from './ApolloExtensionsClient';

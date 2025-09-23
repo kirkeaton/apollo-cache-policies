@@ -1,5 +1,4 @@
 export { InvalidationPolicyCache, makeCachedVar } from "./cache";
-export { ApolloExtensionsClient } from "./client";
 export { InvalidationPolicyCacheAuditor } from "./audit";
 export {
   DefaultPolicyAction,

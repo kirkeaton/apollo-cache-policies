@@ -6,6 +6,7 @@ import {
   Reference,
   StoreObject,
   makeReference,
+  Unmasked,
 } from "@apollo/client/core";
 import compact from "lodash/compact";
 import every from "lodash/every";
@@ -344,7 +345,7 @@ export default class InvalidationPolicyCache extends InMemoryCache {
   }
 
   protected updateCollectionField(typename: string, dataId: string) {
-    // Since colletion support is still experimental, only record entities in collections if enabled
+    // Since collection support is still experimental, only record entities in collections if enabled
     if (!this.enableCollections) {
       return;
     }
@@ -571,7 +572,7 @@ export default class InvalidationPolicyCache extends InMemoryCache {
     filter?: FragmentWhereFilter<FragmentType>;
     limit?: number;
     orderBy?: FragmentWhereOrderBy;
-  }): FragmentType[] {
+  }): Unmasked<FragmentType>[] {
     const { fragment, filter, limit, orderBy, ...restOptions } = options;
     const fragmentDefinition = fragment.definitions[0] as FragmentDefinitionNode;
     const __typename = fragmentDefinition.typeCondition.name.value;
@@ -651,7 +652,7 @@ export default class InvalidationPolicyCache extends InMemoryCache {
 
   writeFragmentWhere<FragmentType, TVariables = any>(options: Cache.ReadFragmentOptions<FragmentType, TVariables> & {
     filter?: FragmentWhereFilter<FragmentType>;
-    update: (entity: FragmentType) => FragmentType;
+    update: (entity: Unmasked<FragmentType>) => Unmasked<FragmentType>;
   }) {
     const { update, ...readOptions } = options;
 
